@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Information</title>
+    <link rel="stylesheet" href="mainpage.css">
+    <link rel="stylesheet" href="chatbox.css">
+    <link rel="stylesheet" href="mpcss.css">
+</head>
+<body>
+<nav class="navbar">
+    <a href="#" class="website-name">Trading System</a>
+    <a href="trading.html">Trade</a>
+    <a href="profile.html">Profile</a>
+    
+    
+</nav>
+    <table id="currency-table">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Today's High</th>
+            <th>Today's Low</th>
+        </tr>
+    </table>
+
+    <div class="chatbox" id="chatbox">
+        <div class="chatbox-header">
+            <h3>Chat With Our ML Chatbot</h3>
+            
+        </div>
+        <div class="chatbox-body">
+            <ul class="messages chat-messages"></ul>
+        </div>
+        <div class="chatbox-footer">
+            <form class="message-form">
+                <input type="text" class="message-input" placeholder="Type your message...">
+                <button type="submit" class="send-btn">Send</button>
+                <button id="chatbox-close" class="close-button">×</button>
+            </form>
+        </div>
+    </div>
+    <button id="chatbox-btn" class="chat-button">+</button>
+    <footer class="footer">
+        <a href="#">Cloud Computing 6998 Project</a>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./cbjs.js"></script>
+</body>
+</html>

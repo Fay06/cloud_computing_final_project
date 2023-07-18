@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        async function submitForm(event) {
+            console.log('start');
+            //event.preventDefault();
+            const username = document.getElementById('username').value;
+            const url = `https://jks1yxo910.execute-api.us-east-1.amazonaws.com/test-user/user/${encodeURIComponent(username)}`;
+            console.log(url)
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const data = await response.json();
+                console.log(data);
+                if (data && data.email) {
+                    localStorage.setItem('userEmail', data.email);
+                    window.location.href = './display.html';
+                    console.log(data);
+                } else {
+                    alert('Invalid credentials or server error. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+                alert('Server error. Please try again.');
+            }
+        }
+    </script>
+    
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar, .footer {
+            display: flex;
+            background-color: #333;
+            padding: 10px;
+            align-items: center;
+        }
+        .navbar a, .footer a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+        }
+        .navbar a:hover, .footer a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .website-name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+        }
+        form {
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"], input[type="password"] {
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #333;
+            color: white;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .footer {
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="website-name">Trading System</a>
+        <a href="trading.html">Trade</a>
+        <a href="profile.html">Profile</a>
+        <a href="signin.html">Sign In</a>
+        <a href="signup.html">Sign Up</a>
+    </nav>
+    <div class="form-container">
+        <form action="#">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit" onclick="submitForm()">Sign In</button>
+        </form>
+    </div>
+    <footer class="footer">
+        <a href="#">Cloud Computing 6998 Project</a>
+    </footer>
+</body>
+</html>

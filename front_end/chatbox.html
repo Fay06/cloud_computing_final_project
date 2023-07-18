@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Chatbox</title>
+    <link rel="stylesheet" href="chatbox.css">
+</head>
+<body>
+    <div class="chatbox">
+        <div class="chatbox-header">
+            <h3>Chat With Our ML Chatbot</h3>
+        </div>
+        <div class="chatbox-body">
+            <ul class="messages chat-messages"></ul>
+        </div>
+        <div class="chatbox-footer">
+            <form class="message-form">
+                <input type="text" class="message-input" placeholder="Type your message...">
+                <button type="submit" class="send-btn">Send</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const messagesList = document.querySelector(".messages");
+const messageForm = document.querySelector(".message-form");
+const messageInput = document.querySelector(".message-input");
+
+const useSampleData = false; //现在是sample data，如果要用server交互就set = false
+
+
+const sampleData = [
+    "Hi there!",
+    "How can I help you?",
+    "That's a great question!",
+    "Sorry, I don't understand.",
+    "Have a nice day!"
+];
+
+messageForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const message = messageInput.value.trim();
+
+    if (!message) return;
+
+    appendMessage(message, "user");
+
+    messageInput.value = "";
+
+    let response;
+    if (useSampleData) {
+        response = getRandomResponse(sampleData);
+    } else {
+        try {
+            response = await sendMessageToServer(message);
+        } catch (error) {
+            console.error("Error:", error);
+            response = "Error sending message to server.";
+        }
+    }
+
+    appendMessage(response, "server");
+});
+
+function appendMessage(text, type) {
+    const li = document.createElement("li");
+    li.textContent = text;
+    li.classList.add(type);
+    messagesList.appendChild(li);
+
+    messagesList.scrollTop = messagesList.scrollHeight;
+}
+
+function getRandomResponse(responses) {
+    return responses[Math.floor(Math.random() * responses.length)];
+}
+
+async function sendMessageToServer(message) {
+    const url = "https://jks1yxo910.execute-api.us-east-1.amazonaws.com/demo/chatbot?messages=hello";
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: message })
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to send message");
+    }
+    console.log(response)
+    const data = await response.json();
+    return data.reply;
+}
+
+    </script>
+</body>
+</html>

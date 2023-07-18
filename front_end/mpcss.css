@@ -1,0 +1,69 @@
+.chat-button {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 24px;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.chat-button:hover {
+    background-color: #0069d9;
+}
+
+/* Updated CSS rules for the table */
+#currency-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+#currency-table th,
+#currency-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e7eaf3;
+}
+
+#currency-table th {
+    background-color: #1a1a1a;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.chatbox-body {
+    overflow-y: auto;
+    max-height: 400px;
+    /* Add other properties for the .chatbox-body class */
+}
+#currency-table tbody tr {
+    font-size: 14px;
+    color: #3b3f5c;
+}
+
+#currency-table tr:nth-child(odd) {
+    background-color: #f8f9fd;
+}
+
+#currency-table tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+#currency-table tr:hover {
+    background-color: #e9e9e9;
+    transition: background-color 0.3s ease;
+}
+
+.currency-row {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.currency-row:hover {
+}
